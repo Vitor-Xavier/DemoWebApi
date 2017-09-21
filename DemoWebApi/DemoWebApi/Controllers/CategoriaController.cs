@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Http;
 using DemoWebApi.Context;
 using DemoWebApi.Models;
+using System.Web.Http.Cors;
 
 namespace DemoWebApi.Controllers
 {
@@ -80,7 +81,7 @@ namespace DemoWebApi.Controllers
         public IHttpActionResult Post([FromBody] Categoria categoria)
         {
             _context.Categorias.Add(categoria);
-            return Created("", _context.SaveChanges());
+            return Created("created", _context.SaveChanges());
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace DemoWebApi.Controllers
         public IHttpActionResult PostAlter([FromBody] Categoria categoria)
         {
             _context.Categorias.AddOrUpdate(categoria);
-            return Created("", _context.SaveChanges());
+            return Ok(_context.SaveChanges());
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace DemoWebApi.Controllers
         public IHttpActionResult PostDelete([FromBody] Categoria categoria)
         {
             _context.Entry(categoria).State = System.Data.Entity.EntityState.Deleted;
-            return Created("", _context.SaveChanges());
+            return Ok(_context.SaveChanges());
         }
     }
 }

@@ -80,7 +80,7 @@ namespace DemoWebApi.Controllers
         public IHttpActionResult PostAlter([FromBody] Teste teste)
         {
             _context.Testes.AddOrUpdate(teste);
-            return Created("", _context.SaveChanges());
+            return Ok(_context.SaveChanges());
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace DemoWebApi.Controllers
         public IHttpActionResult PostDelete([FromBody] Teste teste)
         {
             _context.Entry(teste).State = System.Data.Entity.EntityState.Deleted;
-            return Created("", _context.SaveChanges());
+            return Ok(_context.SaveChanges());
         }
     }
 }
